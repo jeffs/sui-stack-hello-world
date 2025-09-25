@@ -1,6 +1,6 @@
 import { ConnectButton, useCurrentAccount } from "@mysten/dapp-kit";
 import { isValidSuiObjectId } from "@mysten/sui/utils";
-import { Box, Container, Flex, Heading } from "@radix-ui/themes";
+import { Box, Button, Container, Flex, Heading } from "@radix-ui/themes";
 import { useState } from "react";
 import { Greeting } from './Greeting';
 import { CreateGreeting } from "./CreateGreeting";
@@ -19,6 +19,7 @@ function App() {
         px="4"
         py="2"
         justify="between"
+        align={"center"}
         style={{
           borderBottom: "1px solid var(--gray-a2)",
         }}
@@ -27,7 +28,17 @@ function App() {
           <Heading>dApp Starter Template</Heading>
         </Box>
 
-        <Box>
+        <Box style={{ display: "flex", gap: 10, alignItems: "center" }}>
+          {currentAccount && (
+            <Button
+              variant="soft"
+              onClick={() => {
+                window.open(`https://faucet.sui.io/?address=${currentAccount.address}`, '_blank');
+              }}
+            >
+              Get Testnet SUI
+            </Button>
+          )}
           <ConnectButton />
         </Box>
       </Flex>
